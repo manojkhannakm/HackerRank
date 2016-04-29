@@ -1,5 +1,9 @@
 4
-1
-2
+aba
+baba
+aba
+xzxb
 3
-10
+aba
+xzxb
+ab

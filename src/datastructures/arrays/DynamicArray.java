@@ -1,3 +1,5 @@
+package datastructures.arrays;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -6,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class Solution {
+public class DynamicArray {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -30,10 +32,33 @@ public class Solution {
     private static class Problem {
 
         public void solve() {
-            int t = in.nextInt();
+            int n = in.nextInt(),
+                    q = in.nextInt();
 
-            for (int i = 0; i < t; i++) {
+            int[][] a = new int[n][0];
+            int l = 0;
 
+            for (int i = 0; i < q; i++) {
+                int z = in.nextInt(),
+                        x = in.nextInt(),
+                        y = in.nextInt();
+
+                int j = (x ^ l) % n;
+                int[] aj = a[j];
+
+                switch (z) {
+                    case 1:
+                        aj = Arrays.copyOf(aj, aj.length + 1);
+                        aj[aj.length - 1] = y;
+                        a[j] = aj;
+                        break;
+
+                    case 2:
+                        l = aj[y % aj.length];
+
+                        out.println(l);
+                        break;
+                }
             }
         }
 
