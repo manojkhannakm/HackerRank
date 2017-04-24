@@ -1,4 +1,4 @@
-package week23;
+package hack42;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class UnexpectedProblem {
+public class JohnsSubwayCommute {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,34 +31,53 @@ public class UnexpectedProblem {
 
     private static class Problem {
 
-        private static int MOD = 1000000007;
-
         public void solve() {
-            String s = in.nextLine();
-            long m = in.nextLong();
+            char[] s = in.nextLine().toCharArray();
 
-            int n = s.length(),
-                    o = n;
+            int n = s.length,
+                    x;
 
-            for (int i = 1; i <= n / 2; i++) {
-                if (n % i == 0) {
-                    boolean f = true;
+            if (s[n - 1] == 'E') {
+                x = n - 1;
+            } else if (s[0] == 'E') {
+                x = 0;
+            } else {
+                int mc = 0,
+                        mx = 0;
 
-                    for (int j = i; j < n; j++) {
-                        if (s.charAt(j % i) != s.charAt(j)) {
-                            f = false;
-                            break;
+                for (int i = 0; i < n; i++) {
+                    if (s[i] == 'E') {
+                        int c = 0;
+
+                        for (int j = i; j < n; j++) {
+                            if (s[j] == 'O') {
+                                break;
+                            }
+
+                            c++;
                         }
-                    }
 
-                    if (f) {
-                        o = i;
-                        break;
+                        if (c >= mc) {
+                            mc = c;
+                            mx = i;
+
+                            if (c > 1) {
+                                break;
+                            }
+                        }
+
+                        i += c;
                     }
+                }
+
+                if (mc == 1) {
+                    x = mx;
+                } else {
+                    x = mx + 1;
                 }
             }
 
-            out.println(m / o % MOD);
+            out.println(x);
         }
 
     }

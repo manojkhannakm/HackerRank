@@ -1,4 +1,4 @@
-package epiccode;
+package weekofcode23;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class PerfectHiring {
+public class UnexpectedProblem {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,30 +31,34 @@ public class PerfectHiring {
 
     private static class Problem {
 
+        private static int MOD = 1000000007;
+
         public void solve() {
-            long n = in.nextInt(),
-                    p = in.nextInt(),
-                    x = in.nextInt();
+            String s = in.nextLine();
+            long m = in.nextLong();
 
-            long a = 0, res = -1;
-            for (int i = 1; i <= n; i++) {
-                long ai = in.nextInt();
+            int n = s.length(),
+                    o = n;
 
-                if (p < x) {
-                    break;
+            for (int i = 1; i <= n / 2; i++) {
+                if (n % i == 0) {
+                    boolean f = true;
+
+                    for (int j = i; j < n; j++) {
+                        if (s.charAt(j % i) != s.charAt(j)) {
+                            f = false;
+                            break;
+                        }
+                    }
+
+                    if (f) {
+                        o = i;
+                        break;
+                    }
                 }
-
-                ai *= p;
-
-                if (ai > a) {
-                    a = ai;
-                    res = i;
-                }
-
-                p -= x;
             }
 
-            out.println(res);
+            out.println(m / o % MOD);
         }
 
     }

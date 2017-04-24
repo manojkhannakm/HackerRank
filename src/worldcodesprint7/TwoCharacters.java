@@ -1,4 +1,4 @@
-package datastructures.arrays;
+package worldcodesprint7;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class DynamicArray {
+public class TwoCharacters {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -32,34 +32,58 @@ public class DynamicArray {
     private static class Problem {
 
         public void solve() {
-            int n = in.nextInt(),
-                    q = in.nextInt();
+            int n = in.nextInt();
 
-            int[][] a = new int[n][0];
-            int l = 0;
+            String s = in.nextLine();
 
-            for (int i = 0; i < q; i++) {
-                int z = in.nextInt(),
-                        x = in.nextInt(),
-                        y = in.nextInt();
+            int mx = 0;
 
-                int j = (x ^ l) % n;
-                int[] aj = a[j];
+            if (n > 1) {
+                for (int i = 0; i < 26; i++) {
+                    for (int j = 0; j < 26; j++) {
+                        if (i == j) {
+                            continue;
+                        }
 
-                switch (z) {
-                    case 1:
-                        aj = Arrays.copyOf(aj, aj.length + 1);
-                        aj[aj.length - 1] = y;
-                        a[j] = aj;
-                        break;
+                        boolean f = false;
+                        int x = 0;
 
-                    case 2:
-                        l = aj[y % aj.length];
+                        for (int k = 0; k < n; k++) {
+                            char c = s.charAt(k);
 
-                        out.println(l);
-                        break;
+                            if (!f) {
+                                if (c == j + 'a') {
+                                    x = -1;
+                                    break;
+                                }
+
+                                if (c == i + 'a') {
+                                    x++;
+
+                                    f = true;
+                                }
+                            } else {
+                                if (c == i + 'a') {
+                                    x = -1;
+                                    break;
+                                }
+
+                                if (c == j + 'a') {
+                                    x++;
+
+                                    f = false;
+                                }
+                            }
+                        }
+
+                        if (x > mx) {
+                            mx = x;
+                        }
+                    }
                 }
             }
+
+            out.println(mx);
         }
 
     }

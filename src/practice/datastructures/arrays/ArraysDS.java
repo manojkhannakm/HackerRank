@@ -1,4 +1,4 @@
-package datastructures.arrays;
+package practice.datastructures.arrays;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class SparseArrays {
+public class ArraysDS {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,49 +31,19 @@ public class SparseArrays {
 
     private static class Problem {
 
-        private int find(String[] s, int n, String x) {
-            for (int i = 0; i < n; i++) {
-                if (s[i].equals(x)) {
-                    return i;
-                }
-            }
-
-            return -1;
-        }
-
         public void solve() {
             int n = in.nextInt();
 
-            String[] s = new String[n];
-            int[] c = new int[n];
-            int x = 0;
+            int[] a = new int[n];
 
             for (int i = 0; i < n; i++) {
-                String si = in.nextLine();
+                int ai = in.nextInt();
 
-                int j = find(s, x, si);
-
-                if (j == -1) {
-                    s[x] = si;
-                    c[x] = 1;
-                    x++;
-                } else {
-                    c[j]++;
-                }
+                a[i] = ai;
             }
 
-            int q = in.nextInt();
-
-            for (int i = 0; i < q; i++) {
-                String t = in.nextLine();
-
-                int j = find(s, x, t);
-
-                if (j == -1) {
-                    out.println(0);
-                } else {
-                    out.println(c[j]);
-                }
+            for (int i = n - 1; i >= 0; i--) {
+                out.print(a[i] + " ");
             }
         }
 

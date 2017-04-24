@@ -1,4 +1,4 @@
-package week17;
+package weekofcode24;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class FindTheRobot {
+public class AppleAndOrange {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,23 +31,51 @@ public class FindTheRobot {
 
     private static class Problem {
 
-        private long sum(long a, long n) {
-            n = n / 4 + (n % 4 >= a ? 1 : 0);
-
-            return n * ((a + (n - 1) * 4) + a) / 2;
-        }
-
         public void solve() {
-            int t = in.nextInt();
+            int s = in.nextInt(),
+                    t = in.nextInt();
 
-            for (int i = 0; i < t; i++) {
-                int n = in.nextInt();
+            int a = in.nextInt(),
+                    b = in.nextInt();
 
-                long x = sum(1, n) - sum(3, n),
-                        y = sum(2, n) - sum(4, n);
+            int m = in.nextInt(),
+                    n = in.nextInt();
 
-                out.println(x + " " + y);
+            int[] x = new int[m];
+
+            for (int i = 0; i < m; i++) {
+                x[i] = in.nextInt();
             }
+
+            int[] y = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                y[i] = in.nextInt();
+            }
+
+            int c = 0;
+
+            for (int i = 0; i < m; i++) {
+                int ax = a + x[i];
+
+                if (ax >= s && ax <= t) {
+                    c++;
+                }
+            }
+
+            out.println(c);
+
+            c = 0;
+
+            for (int i = 0; i < n; i++) {
+                int by = b + y[i];
+
+                if (by >= s && by <= t) {
+                    c++;
+                }
+            }
+
+            out.println(c);
         }
 
     }

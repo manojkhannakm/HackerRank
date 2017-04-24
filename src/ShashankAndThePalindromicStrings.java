@@ -1,5 +1,3 @@
-package week23;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -8,7 +6,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class TreasureHunting {
+public class ShashankAndThePalindromicStrings {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -32,22 +30,19 @@ public class TreasureHunting {
     private static class Problem {
 
         public void solve() {
-            int x = in.nextInt(),
-                    y = in.nextInt();
+            int q = in.nextInt();
 
-            int a = in.nextInt(),
-                    b = in.nextInt();
+            for (int i = 0; i < q; i++) {
+                int n = in.nextInt();
 
-            int p = -b,
-                    q = a;
-            long d = (long) a * q - (long) p * b,
-                    dk = (long) x * q - (long) p * y,
-                    dn = (long) a * y - (long) x * b;
-            double k = (double) dk / d,
-                    n = (double) dn / d;
+                String[] a = new String[n];
 
-            out.println(k);
-            out.println(n);
+                for (int j = 0; j < n; j++) {
+                    a[j] = in.nextLine();
+                }
+
+
+            }
         }
 
     }

@@ -1,4 +1,4 @@
-package datastructures.arrays;
+package epiccode2015;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class ArraysDS {
+public class DanceInPairs {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -32,19 +32,51 @@ public class ArraysDS {
     private static class Problem {
 
         public void solve() {
-            int n = in.nextInt();
+            int n = in.nextInt(),
+                    k = in.nextInt();
 
-            int[] a = new int[n];
-
+            int[] b = new int[n];
             for (int i = 0; i < n; i++) {
-                int ai = in.nextInt();
-
-                a[i] = ai;
+                b[i] = in.nextInt();
             }
 
-            for (int i = n - 1; i >= 0; i--) {
-                out.print(a[i] + " ");
+            int[] g = new int[n];
+            for (int i = 0; i < n; i++) {
+                g[i] = in.nextInt();
             }
+
+            Arrays.sort(b);
+            Arrays.sort(g);
+
+            int res = 0;
+            for (int i = 0, j = 0; i < n && j < n; ) {
+                int bi = b[i],
+                        gj = g[j];
+
+                if (bi < gj) {
+                    if (gj - bi <= k) {
+                        res++;
+                        i++;
+                        j++;
+                    } else {
+                        i++;
+                    }
+                } else if (gj < bi) {
+                    if (bi - gj <= k) {
+                        res++;
+                        i++;
+                        j++;
+                    } else {
+                        j++;
+                    }
+                } else {
+                    res++;
+                    i++;
+                    j++;
+                }
+            }
+
+            out.println(res);
         }
 
     }

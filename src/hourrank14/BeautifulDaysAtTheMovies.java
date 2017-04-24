@@ -1,4 +1,4 @@
-package week23;
+package hourrank14;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class GearsOfWar {
+public class BeautifulDaysAtTheMovies {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,14 +31,31 @@ public class GearsOfWar {
 
     private static class Problem {
 
-        public void solve() {
-            int q = in.nextInt();
+        private int reverse(int n) {
+            int m = 0;
 
-            for (int i = 0; i < q; i++) {
-                int n = in.nextInt();
-
-                out.println(n % 2 == 0 ? "Yes" : "No");
+            while (n > 0) {
+                m = m * 10 + n % 10;
+                n /= 10;
             }
+
+            return m;
+        }
+
+        public void solve() {
+            int i = in.nextInt(),
+                    j = in.nextInt(),
+                    k = in.nextInt();
+
+            int c = 0;
+
+            for (int l = i; l <= j; l++) {
+                if (Math.abs(l - reverse(l)) % k == 0) {
+                    c++;
+                }
+            }
+
+            out.println(c);
         }
 
     }

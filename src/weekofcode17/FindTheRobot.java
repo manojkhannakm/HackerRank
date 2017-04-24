@@ -1,6 +1,5 @@
-package week23;
+package weekofcode17;
 
-import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -9,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class Lighthouse {
+public class FindTheRobot {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -32,47 +31,23 @@ public class Lighthouse {
 
     private static class Problem {
 
-        private boolean circle(char[][] a, int n, int x, int y, int r) {
-            if (x - r < 0 || x + r > n - 1
-                    || y - r < 0 || y + r > n - 1) {
-                return false;
-            }
+        private long sum(long a, long n) {
+            n = n / 4 + (n % 4 >= a ? 1 : 0);
 
-            Point originPoint = new Point(x, y);
-
-            for (int i = x - r; i <= x + r; i++) {
-                for (int j = y - r; j <= y + r; j++) {
-                    if (new Point(i, j).distance(originPoint) <= r && a[i][j] != '.') {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
+            return n * ((a + (n - 1) * 4) + a) / 2;
         }
 
         public void solve() {
-            int n = in.nextInt();
+            int t = in.nextInt();
 
-            char[][] a = new char[n][];
+            for (int i = 0; i < t; i++) {
+                int n = in.nextInt();
 
-            for (int i = 0; i < n; i++) {
-                String ai = in.nextLine();
+                long x = sum(1, n) - sum(3, n),
+                        y = sum(2, n) - sum(4, n);
 
-                a[i] = ai.toCharArray();
+                out.println(x + " " + y);
             }
-
-            int mr = 0;
-
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    while (circle(a, n, i, j, mr + 1)) {
-                        mr++;
-                    }
-                }
-            }
-
-            out.println(mr);
         }
 
     }

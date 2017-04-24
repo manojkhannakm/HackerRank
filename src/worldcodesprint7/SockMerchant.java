@@ -1,4 +1,4 @@
-package datastructures.arrays;
+package worldcodesprint7;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class TwoDArrayDS {
+public class SockMerchant {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,32 +31,34 @@ public class TwoDArrayDS {
 
     private static class Problem {
 
+        private static final int C_MAX = 110;
+
         public void solve() {
-            int[][] a = new int[6][6];
+            int n = in.nextInt();
 
-            for (int i = 0; i < 6; i++) {
-                for (int j = 0; j < 6; j++) {
-                    int aij = in.nextInt();
+            int[] a = new int[n];
 
-                    a[i][j] = aij;
+            for (int i = 0; i < n; i++) {
+                int ai = in.nextInt();
+
+                a[i] = ai;
+            }
+
+            int[] c = new int[C_MAX];
+
+            for (int i = 0; i < n; i++) {
+                c[a[i]]++;
+            }
+
+            int s = 0;
+
+            for (int i = 0; i < C_MAX; i++) {
+                if (c[i] > 0) {
+                    s += c[i] / 2;
                 }
             }
 
-            int mc = Integer.MIN_VALUE;
-
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    int c = a[i][j] + a[i][j + 1] + a[i][j + 2]
-                            + a[i + 1][j + 1]
-                            + a[i + 2][j] + a[i + 2][j + 1] + a[i + 2][j + 2];
-
-                    if (c > mc) {
-                        mc = c;
-                    }
-                }
-            }
-
-            out.println(mc);
+            out.println(s);
         }
 
     }

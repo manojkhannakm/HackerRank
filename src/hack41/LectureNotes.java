@@ -1,4 +1,4 @@
-package epiccode;
+package hack41;
 
 import java.io.*;
 import java.util.Arrays;
@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class DanceInPairs {
+public class LectureNotes {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -35,48 +35,26 @@ public class DanceInPairs {
             int n = in.nextInt(),
                     k = in.nextInt();
 
-            int[] b = new int[n];
-            for (int i = 0; i < n; i++) {
-                b[i] = in.nextInt();
+            String s = in.nextLine();
+
+            int[] a = new int[k];
+
+            for (int i = 0; i < k; i++) {
+                int ai = in.nextInt();
+
+                a[i] = ai;
             }
 
-            int[] g = new int[n];
-            for (int i = 0; i < n; i++) {
-                g[i] = in.nextInt();
-            }
+            boolean f = false;
 
-            Arrays.sort(b);
-            Arrays.sort(g);
-
-            int res = 0;
-            for (int i = 0, j = 0; i < n && j < n; ) {
-                int bi = b[i],
-                        gj = g[j];
-
-                if (bi < gj) {
-                    if (gj - bi <= k) {
-                        res++;
-                        i++;
-                        j++;
-                    } else {
-                        i++;
-                    }
-                } else if (gj < bi) {
-                    if (bi - gj <= k) {
-                        res++;
-                        i++;
-                        j++;
-                    } else {
-                        j++;
-                    }
-                } else {
-                    res++;
-                    i++;
-                    j++;
+            for (int i = 0; i < k; i++) {
+                if (s.charAt(a[i] - 1) == '0') {
+                    f = true;
+                    break;
                 }
             }
 
-            out.println(res);
+            out.println(f ? "YES" : "NO");
         }
 
     }

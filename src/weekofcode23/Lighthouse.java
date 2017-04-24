@@ -1,5 +1,6 @@
-package epiccode;
+package weekofcode23;
 
+import java.awt.*;
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -8,7 +9,7 @@ import java.util.StringTokenizer;
  * @author Manoj Khanna
  */
 
-public class BeginEnd {
+public class Lighthouse {
 
     private static InputReader in;
     private static PrintWriter out = new PrintWriter(System.out);
@@ -31,22 +32,47 @@ public class BeginEnd {
 
     private static class Problem {
 
+        private boolean circle(char[][] a, int n, int x, int y, int r) {
+            if (x - r < 0 || x + r > n - 1
+                    || y - r < 0 || y + r > n - 1) {
+                return false;
+            }
+
+            Point originPoint = new Point(x, y);
+
+            for (int i = x - r; i <= x + r; i++) {
+                for (int j = y - r; j <= y + r; j++) {
+                    if (new Point(i, j).distance(originPoint) <= r && a[i][j] != '.') {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         public void solve() {
             int n = in.nextInt();
-            String s = in.nextLine();
 
-            long[] a = new long[26];
+            char[][] a = new char[n][];
+
             for (int i = 0; i < n; i++) {
-                char c = s.charAt(i);
-                a[c - 'a']++;
+                String ai = in.nextLine();
+
+                a[i] = ai.toCharArray();
             }
 
-            long res = 0;
-            for (long ai : a) {
-                res += ai * (ai + 1) / 2;
+            int mr = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    while (circle(a, n, i, j, mr + 1)) {
+                        mr++;
+                    }
+                }
             }
 
-            out.println(res);
+            out.println(mr);
         }
 
     }
